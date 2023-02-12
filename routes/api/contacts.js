@@ -12,6 +12,6 @@ router.post('/', createContactValidation, controllerWrapper(controller.addContac
 
 router.delete('/:contactId', controllerWrapper(controller.removeContactById));
 
-router.put('/:contactId', controllerWrapper(controller.updateContactById));
+router.put('/:contactId', createContactValidation, controllerWrapper(controller.updateContactById));
 
 module.exports = router;
