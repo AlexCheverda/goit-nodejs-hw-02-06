@@ -1,17 +1,23 @@
 const express = require('express');
 const controller = require('../../controllers/contacts');
-const createContactValidation = require('../../middlewares/validation');
-const { controllerWrapper } = require('../../helpers'); 
+const {
+    addContactValidation,
+    updateFavoriteContactValidation,
+    putContactValidation,
+} = require('../../schema/validation');
+const { controllerWrapper, validatIdParam } = require('../../helpers'); 
 const router = express.Router();
 
 router.get('/', controllerWrapper(controller.getAllContacts));
 
-router.get('/:contactId', controllerWrapper(controller.getContactById));
+router.get('/:contactId', validatIdParam, controllerWrapper(controller.getContactById));
 
-router.post('/', createContactValidation, controllerWrapper(controller.addContact));
+router.post('/', addContactValidation, controllerWrapper(controller.addContact));
 
-router.delete('/:contactId', controllerWrapper(controller.removeContactById));
+router.delete('/:contactId', validatIdParam, controllerWrapper(controller.removeContactById));
 
-router.put('/:contactId', createContactValidation, controllerWrapper(controller.updateContactById));
+router.put('/:contactId', putContactValidation, validatIdParam, controllerWrapper(controller.updateContactById));
+
+router.patch('/:contactId/favorite', updateFavoriteContactValidation, validatIdParam, controllerWrapper(controller.updateFavorite));
 
 module.exports = router;
