@@ -1,7 +1,7 @@
-const RequestError = require('./RequestError');
 const controllerWrapper = require('./controllerWrapper');
+const validatIdParam = require('./validatId');
 
 module.exports = {
-    RequestError,
     controllerWrapper,
+    validatIdParam,
 };
