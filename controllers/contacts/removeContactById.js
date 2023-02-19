@@ -7,7 +7,7 @@ const removeContactById = async (req, res) => {
         res.status(404).json({ message: 'Not Found!' });
         return;
     }
-    res.status(200).json({ message: 'Contact removed' });
+    res.status(200).json({ message: 'Contact deleted' });
 };
 
 module.exports = removeContactById;
