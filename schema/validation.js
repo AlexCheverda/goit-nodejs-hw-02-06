@@ -5,7 +5,7 @@ module.exports = {
         const schema = Joi.object({
             name: Joi.string().alphanum().min(3).max(25).required(),
             email: Joi.string().email({ minDomainSegments: 2, tlds: { allow: ['com', 'net'] } }).required(),
-            phone: Joi.number().min(7).max(14).required(),
+            phone: Joi.number().min(7).required(),
         });
         const validationResult = schema.validate(req.body);
         if (validationResult.error) {
@@ -18,7 +18,7 @@ module.exports = {
     },
     putContactValidation: (req, res, next) => {
         const schema = Joi.object({
-            name: Joi.string().alphanum().min(3).max(25).required(),
+            name: Joi.string().alphanum().min(3).max(25).optional(),
             email: Joi.string().email({ minDomainSegments: 2, tlds: { allow: ['com', 'net'] } }).optional(),
             phone: Joi.number().optional(),
         }).min(1);
