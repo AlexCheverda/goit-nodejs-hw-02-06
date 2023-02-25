@@ -4,4 +4,4 @@ const auth = require('./auth');
 module.exports = {
     contacts,
     auth
-}
+};

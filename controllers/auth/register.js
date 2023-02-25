@@ -1,23 +1,21 @@
+const bcrypt = require("bcryptjs");
 const { Conflict } = require("http-errors");
-const { User } = require("../../models");
+const { User } = require("../../models/user");
 
 const register = async (req, res) => {
-    const { name, email, password } = req.body;
+    const { email, password } = req.body;
     const user = await User.findOne({ email });
     if (user) {
         throw new Conflict(`User with ${email} already exist`);
     };
-    const result = await User.create({ name, email, password });
+    const hashPassword = await bcrypt.hash(password, 10);
+    const result = await User.create({ email, password: hashPassword });
     res.status(201).json({
-        status: "success",
-        code: 201,
-        data: {
-            user: {
-                email,
-                name
-            }
-        }
-    })
+        user: {
+            email: result.email,
+            subscription: result.subscription,
+        },
+    });
 };
 
 module.exports = register;
