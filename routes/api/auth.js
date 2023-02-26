@@ -2,7 +2,7 @@ const express = require('express');
 const { controllerWrapper } = require('../../helpers'); 
 const { auth: ctrl } = require("../../controllers");
 const { schemas } = require("../../middlewares/validatId");
-const { bodyValidat, auth } = require("../../middlewares");
+const { bodyValidat, auth, upload } = require("../../middlewares");
 
 const router = express.Router();
 
@@ -16,6 +16,8 @@ router.post('/logout', auth, controllerWrapper(ctrl.logout));
 // router.post("/signout");
 
 router.get('/current', auth, controllerWrapper(ctrl.getCurrent));
+
+router.patch('/avatars', auth, upload.single("avatar"), controllerWrapper(ctrl.updAvatar));
 
 router.patch("/", auth, bodyValidat(schemas.joiUpdSubscriptionSchema), controllerWrapper(ctrl.updSubscription));
 
