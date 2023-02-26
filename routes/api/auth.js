@@ -1,8 +1,8 @@
 const express = require('express');
 const { controllerWrapper } = require('../../helpers'); 
 const { auth: ctrl } = require("../../controllers");
-const { schemas } = require("../../models/user");
-const { bodyValidat, auth } = require("../../middlewares")
+const { schemas } = require("../../middlewares/validatId");
+const { bodyValidat, auth } = require("../../middlewares");
 
 const router = express.Router();
 
