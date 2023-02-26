@@ -14,7 +14,7 @@ const updAvatar = async (req, res) => {
     try {   
         await fs.rename(tempUpload, resultUpload);
         Jimp.read(resultUpload).then((imageAvatar) => {
-            return imageAvatar.resize(256, 256).write(resultUpload);
+            return imageAvatar.resize(250, 250).write(resultUpload);
         })
             .catch((err) => {
                 console.error(err);
