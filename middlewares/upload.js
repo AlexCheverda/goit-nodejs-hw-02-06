@@ -20,16 +20,4 @@ const upload = multer({
   storage: multerConfig
 });
 
-// const avatars = [];
-
-// app.post("/api/avatars", upload.single("image"), async (req, res) => {
-//   const { path: tempUpload, originalname } = req.file;
-//   const resultUpload = path.join(contactsDir, originalname);
-//   try {
-//     await fs.rename(tempUpload, resultUpload);
-//   } catch (error) {
-//     await fs.unlink(tempUpload);
-//   }
-// })
-
 module.exports = upload;
