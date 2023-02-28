@@ -6,9 +6,12 @@ const updateContactById = async (req, res) => {
         new: true,
     });
     if (!result) {
-        res.status(404).json({ code: 404, message: "Not found!" });
+        res.status(404).json({
+            code: 404,
+            message: "Not found!"
+        });
         return;
-    }
+    };
     res.json(result);
 };
 

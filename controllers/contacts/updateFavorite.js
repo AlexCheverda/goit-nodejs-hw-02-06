@@ -5,7 +5,7 @@ async function updateStatusContact(contactId, body) {
         new: true,
     });
     return result;
-}
+};
 
 const updateFavorite = async (req, res) => {
     const { contactId } = req.params;
@@ -13,7 +13,7 @@ const updateFavorite = async (req, res) => {
     if (!result) {
         res.status(404).json({ message: "Not found!" });
         return;
-    }
+    };
     res.json(result);
 };
 

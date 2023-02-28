@@ -6,7 +6,7 @@ const bodyValidat = (schema) => {
                 code: 400,
                 message: error
             });
-        }
+        };
         next();
     };
 };

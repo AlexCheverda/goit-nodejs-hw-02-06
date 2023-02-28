@@ -6,7 +6,7 @@ const removeContactById = async (req, res) => {
     if (!result) {
         res.status(404).json({ message: 'Not Found!' });
         return;
-    }
+    };
     res.status(200).json({ message: 'Contact deleted' });
 };
 

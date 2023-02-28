@@ -1,12 +1,16 @@
 const express = require('express');
-const { controllerWrapper } = require('../../helpers'); 
-const { auth: ctrl } = require("../../controllers");
-const { schemas } = require("../../middlewares/validatId");
-const { bodyValidat, auth, upload } = require("../../middlewares");
+const { ctrl } = require('../../controllers/auth');
+const {
+    bodyValidat,
+    auth,
+    upload
+} = require("../../middlewares");
+const { controllerWrapper } = require('../../helpers');
+const { schemas } = require("../../helpers/joiValidate");
 
 const router = express.Router();
 
-router.post('/register', bodyValidat(schemas.joiRegisterSchema), controllerWrapper(ctrl.register));
+router.post("/register", bodyValidat(schemas.joiRegisterSchema), controllerWrapper(ctrl.register));
 // router.post('/signup');
 
 router.post('/login', bodyValidat(schemas.joiLoginSchema), controllerWrapper(ctrl.login));

@@ -41,6 +41,7 @@ const updateContactSchema = Joi.object({
     .optional(),
   phone: Joi.number().optional(),
 }).min(1);
+
 const updateFavoriteSchema = Joi.object({
   favorite: Joi.boolean().required(),
 });
