@@ -11,8 +11,8 @@ const login = async (req, res) => {
     if (!user) {
         throw new Unauthorized();
     };
-    const passCompare = await bcrypt.compare(password, user.password);
-    if (!passCompare) {
+    const passwordCompare = await bcrypt.compare(password, user.password);
+    if (!passwordCompare) {
         throw new Unauthorized();
     };
     const payload = {

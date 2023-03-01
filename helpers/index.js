@@ -1,7 +1,7 @@
 const controllerWrapper = require('./controllerWrapper');
-const schemas = require('./joiValidate');
+const handleMongooseError = require('./handleMongooseError');
 
 module.exports = {
     controllerWrapper,
-    schemas
+    handleMongooseError
 };

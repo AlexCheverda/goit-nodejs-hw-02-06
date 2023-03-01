@@ -1,28 +1,29 @@
 const express = require('express');
-const { ctrl } = require('../../controllers/auth');
+const controller = require('../../controllers/auth');
+const { controllerWrapper } = require('../../helpers');
 const {
     bodyValidat,
     auth,
     upload
 } = require("../../middlewares");
-const { controllerWrapper } = require('../../helpers');
-const { schemas } = require("../../helpers/joiValidate");
+
+const { schemas } = require("../../models/user");
 
 const router = express.Router();
 
-router.post("/register", bodyValidat(schemas.joiRegisterSchema), controllerWrapper(ctrl.register));
+router.post("/register", bodyValidat(schemas.registerSchema), controllerWrapper(controller.register));
 // router.post('/signup');
 
-router.post('/login', bodyValidat(schemas.joiLoginSchema), controllerWrapper(ctrl.login));
+router.post('/login', bodyValidat(schemas.loginSchema), controllerWrapper(controller.login));
 // router.post("/signin");
 
-router.post('/logout', auth, controllerWrapper(ctrl.logout));
+router.get('/current', auth, controllerWrapper(controller.getCurrent));
+
+router.post('/logout', auth, controllerWrapper(controller.logout));
 // router.post("/signout");
 
-router.get('/current', auth, controllerWrapper(ctrl.getCurrent));
+router.patch('/avatars', auth, upload.single("avatar"), controllerWrapper(controller.updAvatar));
 
-router.patch('/avatars', auth, upload.single("avatar"), controllerWrapper(ctrl.updAvatar));
-
-router.patch("/", auth, bodyValidat(schemas.joiUpdSubscriptionSchema), controllerWrapper(ctrl.updSubscription));
+router.patch("/", auth, bodyValidat(schemas.updateSubscriptionSchema), controllerWrapper(controller.updSubscription));
 
 module.exports = router;

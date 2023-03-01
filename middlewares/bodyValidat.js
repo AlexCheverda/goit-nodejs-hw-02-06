@@ -1,15 +1,16 @@
-const { BadRequest } = require("http-errors");
+// const { BadRequest } = require("http-errors");
 
 const bodyValidat = (schema) => {
-    const func = (req, res, next) => {
-        const body = req.body;
-        const { error } = schema.validate(body);
+    return (req, res, next) => {
+        const { error } = schema.validate(req.body);
         if (error) {
-            next(new BadRequest());
+            return res.status(400).json({
+                code: 400,
+                message: error
+            });
         };
         next();
     };
-    return func;
 };
 
 module.exports = bodyValidat;

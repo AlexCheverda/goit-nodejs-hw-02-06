@@ -1,5 +1,6 @@
 const { Schema, model } = require("mongoose");
 const Joi = require("joi");
+const { handleMongooseError } = require('../helpers');
 
 const contactSchema = new Schema(
   {
@@ -25,6 +26,8 @@ const contactSchema = new Schema(
   },
   { versionKey: false, timestamps: true }
 );
+
+contactSchema.post("save", handleMongooseError);
 
 const addContactSchema = Joi.object({
   name: Joi.string().min(3).max(27).required(),
@@ -54,4 +57,4 @@ const schemas = {
 
 const Contact = model("contact", contactSchema);
 
-module.exports = { Contact, schemas, contactSchema };
+module.exports = { Contact, schemas };

@@ -1,8 +1,9 @@
 const bcrypt = require("bcryptjs");
+const { Conflict } = require("http-errors");
 const gravatar = require("gravatar");
 
 const { User } = require("../../models/user");
-const { Conflict } = require("http-errors");
+
 
 const register = async (req, res) => {
     const { email, password } = req.body;
@@ -18,14 +19,10 @@ const register = async (req, res) => {
         avatarURL
     });
     res.status(201).json({
-        status: "success",
-        code: 201,
-        data: {
-            user: {
-                email: result.email,
-                subscription: result.subscription
-            },
-        }, 
+        user: {
+            email: result.email,
+            subscription: result.subscription
+        },
     });
 };
 

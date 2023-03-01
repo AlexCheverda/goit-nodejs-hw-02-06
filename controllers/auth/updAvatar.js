@@ -6,12 +6,12 @@ const { User } = require("../../models/user");
 const avatarDir = path.join(__dirname, "../../", "public", "avatars");
 
 const updAvatar = async (req, res) => {
+    const { _id } = req.user;
+    const { path: tempUpload, originalname } = req.file;
+    const extension = originalname.split(".").pop();
+    const imageName = `${_id}.${extension}`;
+    const resultUpload = path.join(avatarDir, imageName);
     try {
-        const { _id } = req.user;
-        const { path: tempUpload, originalname } = req.file;
-        const extension = originalname.split(".").pop();
-        const imageName = `${_id}.${extension}`;
-        const resultUpload = path.join(avatarDir, imageName);
         await fs.rename(tempUpload, resultUpload);
         Jimp.read(resultUpload).then((imageAvatar) => {
             return imageAvatar.resize(250, 250).write(resultUpload);
@@ -23,7 +23,7 @@ const updAvatar = async (req, res) => {
         await User.findByIdAndUpdate(_id, { avatarURL });
         res.json({ avatarURL });
     } catch (error) {
-        await fs.unlink(req.file.path);
+        await fs.unlink(tempUpload);
         throw error;
     };
 };

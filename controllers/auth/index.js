@@ -1,5 +1,5 @@
-const register = require('./register');
-const login = require('./login');
+const register = require("./register");
+const login = require("./login");
 const logout = require('./logout');
 const getCurrent = require('./getCurrent');
 const updAvatar = require('./updAvatar');
