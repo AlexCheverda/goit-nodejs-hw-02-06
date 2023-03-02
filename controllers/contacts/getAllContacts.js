@@ -17,7 +17,7 @@ const getAllContacts = async (req, res) => {
             $and: [{ owner },
             { favorite: parsedFavorite }]
         }, "-createdAt -updatedAt",
-            { skip, limit }).populatr("owner", "name email");
+            { skip, limit }).populate("owner", "name email");
     }
     res.json(contacts);
 };
