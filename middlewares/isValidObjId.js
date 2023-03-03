@@ -5,7 +5,7 @@ const validatIdParam = (req, res, next) => {
     const result = isValidObjectId(contactId);
     if (!result) {
         res.status(404).json({ message: `${contactId} is not valid` });
-    }
+    };
     next();
 };
 

@@ -1,9 +1,11 @@
-const auth = require("./auth");
 const bodyValidat = require("./bodyValidat");
-const validatIdParam = require("./validatId");
+const validatIdParam = require("./isValidObjId");
+const auth = require("./auth");
+const upload = require("./upload");
 
 module.exports = {
-    auth,
     bodyValidat,
-    validatIdParam
+    validatIdParam,
+    auth,
+    upload
 };
